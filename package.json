@@ -1,0 +1,8 @@
+{
+	"version": "0.0.02",
+	"name":"globalEventHandler",
+	"repository":{
+		"type": "git",
+		"url":"https://github.com/ratscrew/globalEventHandler.git"
+	} 
+}

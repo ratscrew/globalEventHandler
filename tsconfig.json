@@ -1,0 +1,11 @@
+{
+	"compilerOptions": { ///asda
+		"module": "commonjs",
+		"target": "ES5",
+		"sourceMap": true
+	},
+    "exclude": [
+        "node_modules",
+        ".vscode"
+    ]
+}
