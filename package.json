@@ -1,8 +1,20 @@
 {
-	"version": "0.0.02",
-	"name":"globalEventHandler",
-	"repository":{
-		"type": "git",
-		"url":"https://github.com/ratscrew/globalEventHandler.git"
-	} 
+  "version": "0.0.02",
+  "name": "global-event-handler",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ratscrew/globalEventHandler.git"
+  },
+  "scripts": {
+    "tsc": "tsc",
+    "tsc:w": "tsc -w"
+  },
+  "dependencies": {
+    "concurrently": "^2.0.0",
+    "json-socket": "^0.1.2",
+    "performance-now": "^0.2.0",
+    "rxjs": "^5.0.0-beta.4",
+    "typescript": "^1.8.9",
+    "typings": "^0.7.11"
+  }
 }

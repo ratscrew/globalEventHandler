@@ -88,6 +88,6 @@ var gobalEventHandler = (function () {
         });
     }
     return gobalEventHandler;
-})();
+}());
 var gehTest = new gobalEventHandler(9838, 'localhost');
 //# sourceMappingURL=app.js.map
