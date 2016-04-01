@@ -2,7 +2,7 @@ import {Observable,Subject} from 'rxjs'
 
 var now = require("performance-now")
 
-export class gobalEventHandlerClient{
+export class globalEventHandlerClient{
 	
     _socket;
 	eventListeners:{ [id:string]: globalEventLissener} = {};

@@ -179,3 +179,17 @@ export class globalEventHandlerServer {
 }
 
 
+ process.on('message', function(msg) {
+    console.log('Worker ' + process.pid + ' received message from master.', msg);
+    switch (msg.event) {
+        case 'connect':
+            var gehTestServer = new globalEventHandlerServer(9838) ;
+            break;
+    
+        default:
+            break;
+    }
+    
+    
+  });
+

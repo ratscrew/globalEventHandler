@@ -1,8 +1,8 @@
 "use strict";
 var rxjs_1 = require('rxjs');
 var now = require("performance-now");
-var gobalEventHandlerClient = (function () {
-    function gobalEventHandlerClient(port, host) {
+var globalEventHandlerClient = (function () {
+    function globalEventHandlerClient(port, host) {
         var _this = this;
         this.port = port;
         this.host = host;
@@ -54,9 +54,9 @@ var gobalEventHandlerClient = (function () {
             });
         });
     }
-    return gobalEventHandlerClient;
+    return globalEventHandlerClient;
 }());
-exports.gobalEventHandlerClient = gobalEventHandlerClient;
+exports.globalEventHandlerClient = globalEventHandlerClient;
 var globalEvent = (function () {
     function globalEvent(eventName, key, socket, _dispose) {
         var _this = this;
