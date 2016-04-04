@@ -37,7 +37,7 @@ import {Observable,Subject} from 'rxjs'
          if(this._server){
              const cluster = require('cluster');
              if(cluster.isMaster){
-                 this.loanchServer(require('child_process').fork('server.js',[], {execArgv: ['--debug=5859']}));
+                 this.loanchServer(require('child_process').fork(__dirname +  '\\server.js',[], {execArgv: ['--debug=5859']}));
              }
          }
          if(this._client){

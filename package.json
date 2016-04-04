@@ -1,6 +1,15 @@
 {
-  "version": "0.0.02",
+  "version": "0.0.03",
   "name": "global-event-handler",
+   "description": "A hierarchical global event handler.  Runs as its own fork or standalone server and syncs events acros forks and or servers",
+   "keywords": [
+    "global",
+    "event",
+    "handler",
+    "forks",
+    "cluster"
+  ],
+  "author": "Aidan Grace",
   "repository": {
     "type": "git",
     "url": "https://github.com/ratscrew/globalEventHandler.git"
