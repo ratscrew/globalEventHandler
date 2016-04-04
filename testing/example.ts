@@ -1,5 +1,3 @@
-/** branch test **/
-
 import {globalEventHandler,globalEventHandlerOptions, globalEvent,globalEventLissener,globalEventHandlerClient} from '../index';
 
 let _globalEventHandler = new globalEventHandler()
