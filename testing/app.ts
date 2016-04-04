@@ -1,6 +1,6 @@
 class gobalEventHandler{
 	
-	
+	/** This is only a test **/
 	constructor(public port:number, public host:String){
 		var now = require("performance-now"), tA, tB, tId = [];
 		var net = require('net'),
