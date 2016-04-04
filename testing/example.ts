@@ -8,6 +8,7 @@ let _s1:globalEvent = gehTestClient.createEvent('testTwo',{test:{'subKey':1}});
 
 let _o:globalEventLissener = gehTestClient.createEventLissener('lissenToUpdate',{test:1});
 
+
 _s0.next(':-)');
 
 setInterval(()=> _s0.next('fire one'),1000);
