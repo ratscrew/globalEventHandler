@@ -38,7 +38,7 @@ var globalEventHandlerClient = (function () {
         var localSubjects = [];
         var vm = this;
         this._socket.on('connect', function () {
-            console.log('connected');
+            //console.log('connected');
             vm.events.forEach(function (n) {
                 n.connectToSocket(vm._socket);
             });

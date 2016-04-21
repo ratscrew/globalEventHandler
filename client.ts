@@ -21,7 +21,7 @@ export class globalEventHandlerClient{
         let vm = this;
         
 		this._socket.on('connect', function() { //Don't send until we're connected 
-			console.log('connected');
+			//console.log('connected');
 
 			vm.events.forEach((n)=>{
                 n.connectToSocket(vm._socket);

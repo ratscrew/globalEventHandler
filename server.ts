@@ -122,16 +122,16 @@ export class globalEventHandlerServer {
         var lastSocketId = 0;
         var sockets = {};
         var stats = {in:0,out:0, timeSpan:0}, statStartTime = now();
-        setInterval(function(){
-            var timeSpan = (now()-statStartTime)/1000;
-            stats.out = stats.out/timeSpan;
-            stats.in = stats.in/timeSpan;
-            stats.timeSpan = timeSpan;
-            console.log(stats);
-            stats = {in:0,out:0, timeSpan:0};
+        // setInterval(function(){
+        //     var timeSpan = (now()-statStartTime)/1000;
+        //     stats.out = stats.out/timeSpan;
+        //     stats.in = stats.in/timeSpan;
+        //     stats.timeSpan = timeSpan;
+        //     console.log(stats);
+        //     stats = {in:0,out:0, timeSpan:0};
             
-            statStartTime = now()
-        },10000)
+        //     statStartTime = now()
+        // },10000)
         eventMan.onNext(function(eventId,evPackage){
             stats.out++;
             var sId = eventId, dotIndex = sId.indexOf(".");
@@ -141,7 +141,7 @@ export class globalEventHandlerServer {
             socket.sendMessage({eventId: eventId, evPackage:evPackage});
         })
         server.on('connection', function(socket) { //This is a standard net.Socket
-            console.log('connected');
+            //console.log('connected');
             socket = new JsonSocket(socket); //Now we've decorated the net.Socket to be a JsonSocket test
             lastSocketId++;
             sockets[lastSocketId] = socket;
@@ -180,7 +180,7 @@ export class globalEventHandlerServer {
 
 
  process.on('message', function(msg) {
-    console.log('Worker ' + process.pid + ' received message from master.', msg);
+    //console.log('Worker ' + process.pid + ' received message from master.', msg);
     switch (msg.event) {
         case 'connect':
             var gehTestServer = new globalEventHandlerServer(9838) ;
