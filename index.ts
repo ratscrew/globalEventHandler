@@ -52,7 +52,7 @@ import {Observable,Subject} from 'rxjs'
                 console.log(`globalEventServer was killed by signal: ${signal}`);
             } else if( code !== 0 ) {
                 console.log(`globalEventServer exited with error code: ${code}`);
-                this.loanchServer(require('child_process').fork('server.js',[], {execArgv: ['--debug=5859']}));
+                this.loanchServer(require('child_process').fork(__dirname + '\\server.js',[], {execArgv: ['--debug=5859']}));
             } else {
                 console.log('globalEventServer died!');
             }

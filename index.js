@@ -69,7 +69,7 @@ var globalEventHandler = (function () {
             }
             else if (code !== 0) {
                 console.log("globalEventServer exited with error code: " + code);
-                _this.loanchServer(require('child_process').fork('server.js', [], { execArgv: ['--debug=5859'] }));
+                _this.loanchServer(require('child_process').fork(__dirname + '\\server.js', [], { execArgv: ['--debug=5859'] }));
             }
             else {
                 console.log('globalEventServer died!');
