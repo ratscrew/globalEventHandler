@@ -1,5 +1,5 @@
 {
-  "version": "0.0.08",
+  "version": "0.0.10",
   "name": "global-event-handler",
    "description": "A hierarchical global event handler.  Runs as its own fork or standalone server and syncs events acros forks and or servers",
    "keywords": [

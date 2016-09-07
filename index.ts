@@ -27,7 +27,8 @@ import {Observable,Subject} from 'rxjs'
      private _globalEventHandlerClient:globalEventHandlerClient;
      public get globalEventHandlerClient() : globalEventHandlerClient {
          return this._globalEventHandlerClient
-     }
+     } 
+     private _debug = false;
      
      constructor(options:globalEventHandlerOptions = {}){
          for(var _o in options){
@@ -37,7 +38,7 @@ import {Observable,Subject} from 'rxjs'
          if(this._server){
              const cluster = require('cluster');
              if(cluster.isMaster){
-                 this.loanchServer(require('child_process').fork(__dirname +  '\\server.js',[], {execArgv: ['--debug=5859']}));
+                 this.loanchServer(require('child_process').fork(__dirname +  '/server.js',[], {execArgv: ['--debug=5859']}));
              }
          }
          if(this._client){
@@ -46,15 +47,18 @@ import {Observable,Subject} from 'rxjs'
      }
      
      private loanchServer(server){
+         let me = this;
         server.send({event:'connect',port:this._port});
         server.on('exit', (code, signal) => {
             if( signal ) {
-                console.log(`globalEventServer was killed by signal: ${signal}`);
+                if(me._debug) console.log(`globalEventServer was killed by signal: ${signal}`);
             } else if( code !== 0 ) {
-                console.log(`globalEventServer exited with error code: ${code}`);
-                this.loanchServer(require('child_process').fork(__dirname + '\\server.js',[], {execArgv: ['--debug=5859']}));
+                if(me._debug) console.log(`globalEventServer exited with error code: ${code}`);
+                let args = [];
+                if(me._debug) args.push('--debug=5859');
+                me.loanchServer(require('child_process').fork(__dirname + '/server.js',[], {execArgv: args}));
             } else {
-                console.log('globalEventServer died!');
+                if(me._debug) console.log('globalEventServer died!');
             }
         });
      }
@@ -65,4 +69,5 @@ import {Observable,Subject} from 'rxjs'
      client?:boolean,
      server?:boolean,
      serverAddress?:string,
+     debug?:boolean
  }

@@ -12,13 +12,14 @@ var globalEventHandler = (function () {
         this._client = true;
         this._server = true;
         this._serverAddress = 'localhost';
+        this._debug = false;
         for (var _o in options) {
             this['_' + _o] = options[_o];
         }
         if (this._server) {
             var cluster = require('cluster');
             if (cluster.isMaster) {
-                this.loanchServer(require('child_process').fork(__dirname + '\\server.js', [], { execArgv: ['--debug=5859'] }));
+                this.loanchServer(require('child_process').fork(__dirname + '/server.js', [], { execArgv: ['--debug=5859'] }));
             }
         }
         if (this._client) {
@@ -61,18 +62,24 @@ var globalEventHandler = (function () {
         configurable: true
     });
     globalEventHandler.prototype.loanchServer = function (server) {
-        var _this = this;
+        var me = this;
         server.send({ event: 'connect', port: this._port });
         server.on('exit', function (code, signal) {
             if (signal) {
-                console.log("globalEventServer was killed by signal: " + signal);
+                if (me._debug)
+                    console.log("globalEventServer was killed by signal: " + signal);
             }
             else if (code !== 0) {
-                console.log("globalEventServer exited with error code: " + code);
-                _this.loanchServer(require('child_process').fork(__dirname + '\\server.js', [], { execArgv: ['--debug=5859'] }));
+                if (me._debug)
+                    console.log("globalEventServer exited with error code: " + code);
+                var args = [];
+                if (me._debug)
+                    args.push('--debug=5859');
+                me.loanchServer(require('child_process').fork(__dirname + '/server.js', [], { execArgv: args }));
             }
             else {
-                console.log('globalEventServer died!');
+                if (me._debug)
+                    console.log('globalEventServer died!');
             }
         });
     };
