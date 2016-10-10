@@ -1,8 +1,8 @@
 {
-  "version": "0.0.10",
+  "version": "0.0.11",
   "name": "global-event-handler",
-   "description": "A hierarchical global event handler.  Runs as its own fork or standalone server and syncs events acros forks and or servers",
-   "keywords": [
+  "description": "A hierarchical global event handler.  Runs as its own fork or standalone server and syncs events acros forks and or servers",
+  "keywords": [
     "global",
     "event",
     "handler",
@@ -20,9 +20,10 @@
   },
   "dependencies": {
     "concurrently": "^2.0.0",
+    "death": "^1.0.0",
     "json-socket": "^0.1.2",
     "performance-now": "^0.2.0",
-    "rxjs": "^5.0.0-beta.4",
+    "rxjs": "^5.0.0-beta.12",
     "typescript": "^1.8.9",
     "typings": "^0.7.11"
   }

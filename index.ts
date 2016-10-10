@@ -61,7 +61,13 @@ import {Observable,Subject} from 'rxjs'
                 if(me._debug) console.log('globalEventServer died!');
             }
         });
+        let ON_DEATH = require('death')({uncaughtException: true})
+        ON_DEATH(function(signal, err) {
+            server.kill('SIGINT');
+        })
      }
+
+
  }
  
  export interface globalEventHandlerOptions{
