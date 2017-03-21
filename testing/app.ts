@@ -45,7 +45,7 @@ class gobalEventHandler{
 			setTimeout(remove,Math.random()*2000)		
 			
 			var fire1 = ()=>{
-				socket.sendMessage({type:'onEvent',key:{}, evPackage:{name:'testing0',tId:tId});
+				socket.sendMessage({type:'onEvent',key:{}, evPackage:{name:'testing0',tId:tId}});
 				setTimeout(fire1,Math.random()*100)
 			}
 			
