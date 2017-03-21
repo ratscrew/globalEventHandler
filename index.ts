@@ -29,16 +29,51 @@ import {Observable,Subject} from 'rxjs'
          return this._globalEventHandlerClient
      } 
      private _debug = false;
-     
+     private _pm2 = false;
+     pm2:any
      constructor(options:globalEventHandlerOptions = {}){
+         let me = this;
          for(var _o in options){
              this['_' + _o] = options[_o];
          }
-         
+         if(this._pm2) this.pm2 = require('pm2');
          if(this._server){
              const cluster = require('cluster');
              if(cluster.isMaster){
-                 this.loanchServer(require('child_process').fork(__dirname +  '/server.js',[], {execArgv: ['--debug=5859']}));
+                 let args = [];
+                 if(this._debug) args.push('--debug=5859')
+                 if(!this._pm2) this.loanchServer(require('child_process').fork(__dirname +  '/server.js',[], {execArgv: args}));
+                 else{
+                      this.pm2.connect(function(err){
+                        console.log({err:err})
+                        
+                        me.pm2.list(function(err,pList){
+                            //console.log(pList)
+                            var pi = pList.find(function(pp){
+                                console.log(pp.pm2_env.status)
+                                return pp.name == 'server' && pp.pm2_env.status != 'stopped'
+                            })
+                            if(pi) console.log(pi.pm2_env.pm_id)
+                            if(pi) me.pm2.sendDataToProcessId(pi.pm2_env.pm_id,{topic:'process:msg',data:{ event: 'connect', port: me._port }},function(err){
+                                    console.log({err:err})
+                                })
+                            else{
+                                var c = me.pm2.start({script:__dirname + '/server.js',function (error,apps) {
+                                    console.log({error:error})
+                                    console.log({apps:apps})
+                                }})
+                                var pi = pList.find(function(pp){
+                                    //console.log(pp.name)
+                                    return pp.name == 'server' && pp.pm2_env.status != 'stopped'
+                                })
+                                if(pi) me.pm2.sendDataToProcessId({type:'process:msg',data:{ event: 'connect', port: me.port },id:pi.pm2_env.pm_id},function(err){
+                                    console.log({err:err})
+                                })
+                            }
+                        })
+                    })
+
+                 }
              }
          }
          if(this._client){
@@ -75,5 +110,6 @@ import {Observable,Subject} from 'rxjs'
      client?:boolean,
      server?:boolean,
      serverAddress?:string,
-     debug?:boolean
+     debug?:boolean,
+     pm2?:boolean
  }

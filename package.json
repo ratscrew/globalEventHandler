@@ -23,7 +23,7 @@
     "death": "^1.0.0",
     "json-socket": "^0.1.2",
     "performance-now": "^0.2.0",
-    "rxjs": "^5.0.0-beta.12",
+    "rxjs": "^5.2.0",
     "typescript": "^1.8.9",
     "typings": "^0.7.11"
   }
